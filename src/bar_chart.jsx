@@ -26,7 +26,7 @@ export class BarChart extends React.Component {
                       .attr('width', chartWidth)
                       .attr('height', chartHeight)
 
-        const chart = svg.selectAll('rect')
+        const chartBars = svg.selectAll('rect')
                         .data(this.state.data)
                         .enter()
                         .append('rect') // adds a rectangle to each data piece
@@ -44,6 +44,23 @@ export class BarChart extends React.Component {
                             // we don't change the y-axis because we want all bars on same line
                         .attr('fill', 'skyBlue')
 
+
+        //////////////////////// CREATING LABBELS START //////////////////////////////
+        const text = svg.selectAll('text')
+                        .data(this.state.data)
+                        .enter()
+                        .append('text')
+                        .attr('y', function(d) {
+                            return chartHeight - d - 2
+                        })
+                        .attr('x', function(d, i) {
+                            return barWidth * i
+                        })
+                        .text(function(d) {
+                            return d
+                        })
+                        .attr('fill', 'pink')
+        //////////////////////// CREATING LABBELS END //////////////////////////////
     }
 
     render() {
