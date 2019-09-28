@@ -27,15 +27,24 @@ export class BarChart extends React.Component {
                       .attr('height', chartHeight)
                       .style("background-color", 'lightYellow')
 
+        //////////////////////// SCALING START //////////////////////////////
+        const yScale = d3.scaleLinear()
+                        .domain([0, d3.max(this.state.data) + 6]) // The maximum spread of numbers that we have in the graph
+                                                                  // Added 6 to have space for text
+                        .range([0, chartHeight])              // The range that we want to display
+                        // Basically, this grabs your data and scales it down or up to fit the chart as needed
+                        // You then need to apply this to all the 'height' or 'y' related aspects of your graph so it can scale as needed
+        //////////////////////// SCALING END //////////////////////////////
+        
         const chartBars = svg.selectAll('rect')
                         .data(this.state.data)
                         .enter()
                         .append('rect') // adds a rectangle to each data piece
                         .attr('y', function(d) {
-                            return chartHeight - d
+                            return chartHeight - yScale(d)
                         }) // question ) not sure what this does
                         .attr('height', function(d) {
-                            return d
+                            return yScale(d)
                         }) // this is the height of each rect. It is the size of the data
                         .attr('width', barWidth - barPadding) // obvious
                         .attr('transform', function(_, i) {
@@ -52,7 +61,7 @@ export class BarChart extends React.Component {
                         .enter()
                         .append('text') // appending text to each of the data point
                         .attr('y', function(d) {
-                            return chartHeight - d - 2
+                            return chartHeight - yScale(d) - 2
                         })
                         .attr('x', function(_, i) {
                             return barWidth * i
@@ -62,6 +71,7 @@ export class BarChart extends React.Component {
                         }) // The content of the text is going to be the value of the bars themselves
                         .attr('fill', 'pink')
         //////////////////////// CREATING LABBELS END //////////////////////////////
+
     }
 
     render() {
