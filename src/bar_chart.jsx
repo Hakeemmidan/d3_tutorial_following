@@ -25,6 +25,7 @@ export class BarChart extends React.Component {
         const svg = d3.select('svg')
                       .attr('width', chartWidth)
                       .attr('height', chartHeight)
+                      .style("background-color", 'lightYellow')
 
         const chartBars = svg.selectAll('rect')
                         .data(this.state.data)
@@ -37,7 +38,7 @@ export class BarChart extends React.Component {
                             return d
                         }) // this is the height of each rect. It is the size of the data
                         .attr('width', barWidth - barPadding) // obvious
-                        .attr('transform', function(d, i) {
+                        .attr('transform', function(_, i) {
                             let translate = [barWidth * i, 0]
                             return "translate(" + translate + ")"
                         }) // this gives each bar its location within the x axis 
@@ -49,16 +50,16 @@ export class BarChart extends React.Component {
         const text = svg.selectAll('text')
                         .data(this.state.data)
                         .enter()
-                        .append('text')
+                        .append('text') // appending text to each of the data point
                         .attr('y', function(d) {
                             return chartHeight - d - 2
                         })
-                        .attr('x', function(d, i) {
+                        .attr('x', function(_, i) {
                             return barWidth * i
                         })
                         .text(function(d) {
                             return d
-                        })
+                        }) // The content of the text is going to be the value of the bars themselves
                         .attr('fill', 'pink')
         //////////////////////// CREATING LABBELS END //////////////////////////////
     }
