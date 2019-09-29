@@ -1,4 +1,3 @@
-// Note : This still needs some fiddling as the y axis is going through the axis 0 point
 import React from 'react';
 import * as d3 from 'd3';
 
@@ -46,7 +45,7 @@ export class Axis extends React.Component {
                                                 // top of page 'chartHeight - 20' points
                                                 // keep in mind that the chart height does not define
                                                 // the limits of this iamge as we have added some constants to it
-                                                
+
         svg.append('g')
             .attr('transform', 'translate(25,' + xAxisTranslate + ')') 
             .call(xAxis)
