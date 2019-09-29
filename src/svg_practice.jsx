@@ -15,7 +15,7 @@ export class SvgPractice extends React.Component {
         const chartWidth = 500
         const chartHeight = 300 
         const svg = d3.select('svg')
-                      .attr('width', chartWidth)
+                      .attr('width', chartWidth - 45)
                       .attr('height', chartHeight)
                       .style('background-color', 'wheat')
 
