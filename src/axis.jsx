@@ -20,8 +20,8 @@ export class Axis extends React.Component {
         const chartHeight = 500
         
         const svg = d3.select('svg')
-          .attr('width', chartWidth)
-          .attr('height', chartHeight)
+          .attr('width', chartWidth + 40) // These integer addition are giving the axis some breathing space
+          .attr('height', chartHeight + 60)
           .style("background-color", 'pink')
 
         const xScale = d3.scaleLinear()
@@ -39,16 +39,16 @@ export class Axis extends React.Component {
                         .scale(yScale)
         
         svg.append('g')
-            .attr('transform', 'translate(50, -20)') // moves yaxis 50 points to right and 20 down
+            .attr('transform', 'translate(25, 20)') // moves yaxis 25 points to right and 20 down
             .call(yAxis)
         
-        const xAxisTranslate = chartHeight - 20 // This is saying that we are going to go down from
+        const xAxisTranslate = chartHeight +20  // This is saying that we are going to go down from
                                                 // top of page 'chartHeight - 20' points
-                                                // we subtract 20 to lift the x axis up a bit
-                                                // remmeber that axis in d3 start at the top left of 
-                                                // the page
+                                                // keep in mind that the chart height does not define
+                                                // the limits of this iamge as we have added some constants to it
+                                                
         svg.append('g')
-            .attr('transform', 'translate(50,' + xAxisTranslate + ')') 
+            .attr('transform', 'translate(25,' + xAxisTranslate + ')') 
             .call(xAxis)
     }
 
