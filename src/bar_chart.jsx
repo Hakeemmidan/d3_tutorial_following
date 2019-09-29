@@ -29,10 +29,8 @@ export class BarChart extends React.Component {
 
         //////////////////////// SCALING START //////////////////////////////
         const yScale = d3.scaleLinear()
-                        .domain([0, d3.max(this.state.data) + 6]) // The maximum spread of numbers that we have in the graph
-                                                                  // Added 6 to have space for text
-                        .range([0, chartHeight])              // The range that we want to display
-                        // Basically, this grabs your data and scales it down or up to fit the chart as needed
+                        .domain([0, d3.max(this.state.data) + 6]) // Takes in any range of data values
+                        .range([0, chartHeight])                  // shrinks it or expands it to fit into this one
                         // You then need to apply this to all the 'height' or 'y' related aspects of your graph so it can scale as needed
         //////////////////////// SCALING END //////////////////////////////
         

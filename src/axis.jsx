@@ -26,26 +26,29 @@ export class Axis extends React.Component {
 
         const xScale = d3.scaleLinear()
                         .domain([0, d3.max(this.state.data)])
-                        .range([0, chartWidth])
+                        .range([0, chartWidth]) 
 
         const yScale = d3.scaleLinear()
                         .domain([d3.max(this.state.data), 0]) // Fliping this inverses the numbers on the axis
                         .range([0, chartHeight])
 
         const xAxis = d3.axisBottom()
-                        .scale(xScale)
+                        .scale(xScale) // This expands the axis based on the given scale
         
         const yAxis = d3.axisLeft()
                         .scale(yScale)
         
         svg.append('g')
-            .attr('transform', 'translate(50, 0)')
+            .attr('transform', 'translate(50, -20)') // moves yaxis 50 points to right and 20 down
             .call(yAxis)
         
-        const xAxisTranslate = chartHeight - 20
-
+        const xAxisTranslate = chartHeight - 20 // This is saying that we are going to go down from
+                                                // top of page 'chartHeight - 20' points
+                                                // we subtract 20 to lift the x axis up a bit
+                                                // remmeber that axis in d3 start at the top left of 
+                                                // the page
         svg.append('g')
-            .attr('transform', 'translate(50,' + xAxisTranslate + ')')
+            .attr('transform', 'translate(50,' + xAxisTranslate + ')') 
             .call(xAxis)
     }
 
